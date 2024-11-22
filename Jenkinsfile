@@ -24,8 +24,15 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t $DOCKERHUB_USERNAME/$IMAGE_NAME .'
+                    sh 'docker build -t app .'
                 }
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                echo 'Running Docker container...'
+                bat "docker run -d -p 5000:5000 app"
             }
         }
 
