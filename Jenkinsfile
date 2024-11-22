@@ -1,11 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "html-page"
+        DOCKERHUB_USERNAME = "sumersmr7@gmail.com" // Set this to your Docker Hub username
+        DOCKERHUB_PASSWORD = credentials('dockerhub-password') // Set this to Jenkins credentials for Docker Hub
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
                 // Pull the latest code from the repository
-                git 'https://github.com/your-repo/your-html-page.git'
+                git 'https://github.com/Sumerali5581/jenkins_try.git'
             }
         }
 
@@ -13,8 +19,15 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t $DOCKERHUB_USERNAME/$IMAGE_NAME .'
+                    sh 'docker build -t app .'
                 }
+            }
+        }
+        
+        stage('Run Application') {
+            steps {
+                echo 'Running Docker container...'
+                bat "docker run -d -p 8080:8080 app"
             }
         }
 
