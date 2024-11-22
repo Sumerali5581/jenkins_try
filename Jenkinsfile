@@ -29,34 +29,34 @@ pipeline {
             }
         }
 
-        stage('Login to Docker Hub') {
-            steps {
-                script {
-                    // Login to Docker Hub
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    }
-                }
-            }
-        }
+        // stage('Login to Docker Hub') {
+        //     steps {
+        //         script {
+        //             // Login to Docker Hub
+        //             withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+        //                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    // Push the Docker image to Docker Hub
-                    sh 'docker push $DOCKERHUB_USERNAME/$IMAGE_NAME'
-                }
-            }
-        }
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             // Push the Docker image to Docker Hub
+        //             sh 'docker push $DOCKERHUB_USERNAME/$IMAGE_NAME'
+        //         }
+        //     }
+        // }
 
-        stage('Clean Up') {
-            steps {
-                script {
-                    // Optionally remove the Docker image after pushing
-                    sh 'docker rmi $DOCKERHUB_USERNAME/$IMAGE_NAME'
-                }
-            }
-        }
+        // stage('Clean Up') {
+        //     steps {
+        //         script {
+        //             // Optionally remove the Docker image after pushing
+        //             sh 'docker rmi $DOCKERHUB_USERNAME/$IMAGE_NAME'
+        //         }
+        //     }
+        // }
     }
 
     post {
