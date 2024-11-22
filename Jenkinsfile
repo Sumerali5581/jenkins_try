@@ -3,15 +3,20 @@ pipeline {
 
     environment {
         IMAGE_NAME = "html-page"
-        DOCKERHUB_USERNAME = "your-dockerhub-username" // Set this to your Docker Hub username
+        DOCKERHUB_USERNAME = credentials('dockerhub-credentials') // Set this to your Docker Hub username
         DOCKERHUB_PASSWORD = credentials('dockerhub-credentials') // Set this to Jenkins credentials for Docker Hub
     }
 
     stages {
-        stage('Clone Repository') {
+        // stage('Clone Repository') {
+        //     steps {
+        //         // Pull the latest code from the repository
+        //         git branch: 'main', url: 'https://github.com/Sumerali5581/jenkins_try.git'
+        //     }
+        //}
+         stage('Checkout SCM') {
             steps {
-                // Pull the latest code from the repository
-                git branch: 'main', url: 'https://github.com/Sumerali5581/jenkins_try.git'
+                checkout scm
             }
         }
 
