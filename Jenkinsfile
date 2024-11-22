@@ -29,7 +29,7 @@ pipeline {
         stage('Run Application') {
             steps {
                 echo 'Running Docker container...'
-                bat "docker run -d -p 8080:8080 app"
+                bat "docker run -d -p 9090:9090 app"
             }
         }
     }
