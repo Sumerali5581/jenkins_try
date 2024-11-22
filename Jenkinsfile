@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "html-page"
-        DOCKERHUB_USERNAME = credentials('dockerhub-credentials') // Set this to your Docker Hub username
-        DOCKERHUB_PASSWORD = credentials('dockerhub-credentials') // Set this to Jenkins credentials for Docker Hub
-    }
+    // environment {
+    //     IMAGE_NAME = "html-page"
+    //     DOCKERHUB_USERNAME = credentials('dockerhub-credentials') // Set this to your Docker Hub username
+    //     DOCKERHUB_PASSWORD = credentials('dockerhub-credentials') // Set this to Jenkins credentials for Docker Hub
+    // }
 
     stages {
         // stage('Clone Repository') {
@@ -59,10 +59,10 @@ pipeline {
         // }
     }
 
-    post {
-        always {
-            // Ensure Docker containers are cleaned up after pipeline runs
-            sh 'docker ps -a -q | xargs docker rm -f || true'
-        }
-    }
+    // post {
+    //     always {
+    //         // Ensure Docker containers are cleaned up after pipeline runs
+    //         sh 'docker ps -a -q | xargs docker rm -f || true'
+    //     }
+    // }
 }
