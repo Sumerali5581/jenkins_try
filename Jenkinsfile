@@ -11,7 +11,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Pull the latest code from the repository
-                git 'https://github.com/Sumerali5581/jenkins_try.git'
+                git branch: 'main', url: 'https://github.com/Sumerali5581/jenkins_try.git'
             }
         }
 
