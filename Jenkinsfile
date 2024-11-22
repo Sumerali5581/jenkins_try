@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         IMAGE_NAME = "html-page"
-        DOCKERHUB_USERNAME = "sumersmr7@gmail.com" // Set this to your Docker Hub username
-        DOCKERHUB_PASSWORD = credentials('dockerhub-password') // Set this to Jenkins credentials for Docker Hub
+        DOCKERHUB_USERNAME = "your-dockerhub-username" // Set this to your Docker Hub username
+        DOCKERHUB_PASSWORD = credentials('dockerhub-credentials') // Set this to Jenkins credentials for Docker Hub
     }
 
     stages {
@@ -19,15 +19,8 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t app .'
+                    sh 'docker build -t $DOCKERHUB_USERNAME/$IMAGE_NAME .'
                 }
-            }
-        }
-        
-        stage('Run Application') {
-            steps {
-                echo 'Running Docker container...'
-                bat "docker run -d -p 8080:8080 app"
             }
         }
 
@@ -63,7 +56,7 @@ pipeline {
 
     post {
         always {
-            // Clean up Docker containers if necessary
+            // Ensure Docker containers are cleaned up after pipeline runs
             sh 'docker ps -a -q | xargs docker rm -f || true'
         }
     }
